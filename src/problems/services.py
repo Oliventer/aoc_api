@@ -30,8 +30,7 @@ class ModelAutoCreateService:
 
     def parse_all_problems(self):
         for day in self.get_all_days():
-            link = 'https://adventofcode.com' + day # /2019/25/ /1-31/
-            self.parse_problem(link)
+            link = 'https://adventofcode.com' + day
 
     def parse_problem(self, link):
         response = requests.get(link)

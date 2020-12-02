@@ -1,6 +1,5 @@
 import pytest
 from rest_framework.test import APIClient
-from freezegun import freeze_time
 from problems.models import Problem, Advent
 from problems.services import ModelAutoCreateService
 from problems.advent_service import AdventCreateService

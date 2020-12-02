@@ -1,4 +1,3 @@
-from django.db import IntegrityError
 from problems.models import Advent
 
 

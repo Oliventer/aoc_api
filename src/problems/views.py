@@ -3,8 +3,6 @@ from problems.models import Problem, Advent
 from problems.serializer import ProblemSerializer, AdventSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.db.models import Max
-from django.forms.models import model_to_dict
 
 
 class AdventViewset(viewsets.ModelViewSet):
