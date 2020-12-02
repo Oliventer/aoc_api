@@ -17,4 +17,4 @@ class AdventSerializer(serializers.ModelSerializer):
 class ProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Problem
-        fields = ['title', 'description', 'advent', 'link', 'day', ]
+        fields = ['id', 'title', 'description', 'advent', 'link', 'day', ]

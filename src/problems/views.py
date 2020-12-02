@@ -11,7 +11,6 @@ class AdventViewset(viewsets.ModelViewSet):
 
 
 class ProblemViewset(viewsets.ModelViewSet):
-    queryset = Problem.objects.all()
     serializer_class = ProblemSerializer
 
     def get_queryset(self):

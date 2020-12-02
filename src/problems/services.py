@@ -24,18 +24,19 @@ class ModelAutoCreateService:
         r = requests.get(f'https://adventofcode.com/{self.advent.year}')
 
         soup = BeautifulSoup(r.text, 'html.parser')
-        days = filter(lambda link: f'/{self.advent.year}/day/25' in link,
+        days = filter(lambda link: f'/{self.advent.year}/day/' in link,
                       map(lambda a: a.get('href'), reversed(soup.find_all('a'))))
         return days
 
     def parse_all_problems(self):
         for day in self.get_all_days():
             link = 'https://adventofcode.com' + day
+            self.parse_problem(link)
 
     def parse_problem(self, link):
         response = requests.get(link)
         soup = BeautifulSoup(response.text, 'html.parser').find('article')
         title = ''.join(soup.find('h2').contents)
-        description = ''.join(soup.get_text()[1:])
+        description = ''.join(soup.get_text().replace(title, ''))
         day = int(link.rstrip('/').split('/')[-1])
         self._create_model(title, description, link, day)
