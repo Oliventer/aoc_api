@@ -1,6 +1,7 @@
 from datetime import datetime
 from aoc_api.celery import app
 from problems.services import ModelAutoCreateService
+from problems.advent_service import AdventCreateService
 from celery.schedules import crontab
 
 
@@ -11,4 +12,4 @@ def setup_periodic_tasks(sender, **kwargs):
 
 @app.task
 def problem_uploader():
-    ModelAutoCreateService(datetime.year)()
+    ModelAutoCreateService(AdventCreateService(datetime.year)())()
