@@ -62,7 +62,7 @@ def test_advent_service_objects_creation():
 
 
 def test_nested_relationship(api, problem):
-    response = api.get('/advents/100500/problems/1/')
+    response = api.get('/advents/100500/problems/100500/')
     assert response.status_code == 200
 
 
