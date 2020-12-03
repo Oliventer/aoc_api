@@ -12,6 +12,7 @@ class AdventViewset(viewsets.ModelViewSet):
 
 class ProblemViewset(viewsets.ModelViewSet):
     serializer_class = ProblemSerializer
+    lookup_field = 'day'
 
     def get_queryset(self):
         return Problem.objects.filter(advent=self.kwargs['advent_pk'])
