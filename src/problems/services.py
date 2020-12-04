@@ -4,6 +4,10 @@ from django.db import IntegrityError
 from problems.models import Problem, Advent
 
 
+class AocApiException(Exception):
+    pass
+
+
 class ModelAutoCreateService:
     def __init__(self, advent):
         self.advent = advent
@@ -22,6 +26,8 @@ class ModelAutoCreateService:
 
     def get_all_days(self):
         r = requests.get(f'https://adventofcode.com/{self.advent.year}')
+        if r.status_code != 200:
+            raise AocApiException(f'Got non-200 response from AoC: {r.status_code}')
 
         soup = BeautifulSoup(r.text, 'html.parser')
         days = filter(lambda link: f'/{self.advent.year}/day/' in link,
@@ -37,6 +43,6 @@ class ModelAutoCreateService:
         response = requests.get(link)
         soup = BeautifulSoup(response.text, 'html.parser').find('article')
         title = ''.join(soup.find('h2').contents)
-        description = ''.join(soup.get_text().replace(title, ''))
+        description = soup.get_text().replace(title, '')
         day = int(link.rstrip('/').split('/')[-1])
         self._create_model(title, description, link, day)

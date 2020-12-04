@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
-from problems.services import ModelAutoCreateService
-from problems.advent_service import AdventCreateService
+from problems.tasks import problem_uploader
 
 
 class Command(BaseCommand):
@@ -8,4 +7,4 @@ class Command(BaseCommand):
     help = 'our help string comes here'
 
     def handle(self, *args, **options):
-        ModelAutoCreateService(AdventCreateService(2019)())()
+        problem_uploader.delay(2019)
